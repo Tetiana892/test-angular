@@ -25,7 +25,7 @@ export class AppComponent {
 
   onSubmit() {
     console.log(this.form.value);
-    // this.resetStrength();
+    this.resetStrength();
     this.form.reset();
   }
 
@@ -38,24 +38,24 @@ export class AppComponent {
     const password = passwordControl.value;
 
     if (!password || password.length < 8) {
-      // Если пароль пустой или менее 8 символов, все разделы красные
+      // Якщо пароль порожній або менше 8 символів, всі розділи червоні
       this.passwordStrength = 'easy';
     } else if (
       /[a-zA-Z]/.test(password) &&
       /[0-9]/.test(password) &&
       /[^a-zA-Z0-9]/.test(password)
     ) {
-      // Если пароль содержит буквы, цифры и символы, он надежный (все разделы зеленые)
+      // Якщо пароль містить літери, цифри та символи, він надійний (усі розділи зелені)
       this.passwordStrength = 'strong';
     } else if (/[a-zA-Z]/.test(password) && /[0-9]/.test(password)) {
-      // Если пароль содержит буквы и цифры, он средний (первые два раздела желтые, последний серый)
+      // Якщо пароль містить літери та цифри, він середній (перші два розділи жовті, останній сірий)
       this.passwordStrength = 'medium';
     } else {
-      // В противном случае пароль простой (первый раздел красный, остальные серые)
+      // Якщо пароль містить букви та цифри, він середній (перші два розділи жовті, останній сірий)
       this.passwordStrength = 'easy';
     }
   }
-  // resetStrength() {
-  //   this.passwordStrength = 'empty';
-  // }
+  resetStrength() {
+    this.passwordStrength = 'empty';
+  }
 }
