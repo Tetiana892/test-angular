@@ -1,73 +1,63 @@
-<!-- <form class="card" [formGroup]="myForm" (ngSubmit)="onSubmit()">
-  <div class="input-field">
-    <label for="passwordInput">Enter Password:</label>
-    <input
-      id="passwordInput"
-      type="password"
-      formControlName="password"
-      required
-    />
-  </div>
-  <div class="strength-section" id="section1"></div>
-  <div class="strength-section" id="section2"></div>
-  <div class="strength-section" id="section3"></div>
-  <div class="card-action">
-    <button class="btn" type="submit" [disabled]="!myForm.valid">Submit</button>
-  </div>
-</form> -->
-
 <form class="card" [formGroup]="form" (ngSubmit)="onSubmit()">
   <label for="passwordInput"> Enter Password:</label>
-  <input type="password" id="passwordInput" oninput="checkPasswordStrength()" />
-
+  <input
+    type="password"
+    id="passwordInput"
+    placeholder="password"
+    formControlName="password"
+    oninput="checkPasswordStrength()"
+  />
+  <div class="card-action">
+    <button class="btn" type="submit" [disabled]="!form.valid">Submit</button>
+  </div>
   <div class="strength-section" id="section1"></div>
   <div class="strength-section" id="section2"></div>
   <div class="strength-section" id="section3"></div>
+</form>
 
-  <script>
-    function checkPasswordStrength() {
-      const passwordInput = document.getElementById("passwordInput");
-      const section1 = document.getElementById("section1");
-      const section2 = document.getElementById("section2");
-      const section3 = document.getElementById("section3");
+<script>
+  function checkPasswordStrength() {
+    const passwordInput = document.getElementById("passwordInput");
+    const section1 = document.getElementById("section1");
+    const section2 = document.getElementById("section2");
+    const section3 = document.getElementById("section3");
 
-      const password = passwordInput.value;
+    const password = passwordInput.value;
 
-      if (password.length === 0) {
+    if (password.length === 0) {
+      section1.style.backgroundColor =
+        section2.style.backgroundColor =
+        section3.style.backgroundColor =
+          "gray";
+    } else if (password.length < 8) {
+      section1.style.backgroundColor =
+        section2.style.backgroundColor =
+        section3.style.backgroundColor =
+          "red";
+    } else {
+      // Check for password strength
+      const hasLetters = /[a-zA-Z]/.test(password);
+      const hasDigits = /\d/.test(password);
+      const hasSymbols = /[^a-zA-Z0-9]/.test(password);
+
+      if (hasLetters && hasDigits && hasSymbols) {
         section1.style.backgroundColor =
           section2.style.backgroundColor =
           section3.style.backgroundColor =
-            "gray";
-      } else if (password.length < 8) {
-        section1.style.backgroundColor =
-          section2.style.backgroundColor =
-          section3.style.backgroundColor =
-            "red";
+            "green";
+      } else if (
+        (hasLetters && hasDigits) ||
+        (hasLetters && hasSymbols) ||
+        (hasDigits && hasSymbols)
+      ) {
+        section1.style.backgroundColor = section2.style.backgroundColor =
+          "yellow";
+        section3.style.backgroundColor = "gray";
       } else {
-        // Check for password strength
-        const hasLetters = /[a-zA-Z]/.test(password);
-        const hasDigits = /\d/.test(password);
-        const hasSymbols = /[^a-zA-Z0-9]/.test(password);
-
-        if (hasLetters && hasDigits && hasSymbols) {
-          section1.style.backgroundColor =
-            section2.style.backgroundColor =
-            section3.style.backgroundColor =
-              "green";
-        } else if (
-          (hasLetters && hasDigits) ||
-          (hasLetters && hasSymbols) ||
-          (hasDigits && hasSymbols)
-        ) {
-          section1.style.backgroundColor = section2.style.backgroundColor =
-            "yellow";
-          section3.style.backgroundColor = "gray";
-        } else {
-          section1.style.backgroundColor = "red";
-          section2.style.backgroundColor = section3.style.backgroundColor =
-            "gray";
-        }
+        section1.style.backgroundColor = "red";
+        section2.style.backgroundColor = section3.style.backgroundColor =
+          "gray";
       }
     }
-  </script>
-</form>
+  }
+</script>

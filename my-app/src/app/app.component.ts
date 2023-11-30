@@ -12,7 +12,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 })
 export class AppComponent {
   form: FormGroup = new FormGroup({
-    password: new FormControl('', Validators.required),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(8),
+    ]),
   });
   onSubmit() {
     console.log(this.form.value);
