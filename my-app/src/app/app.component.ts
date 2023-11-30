@@ -15,21 +15,20 @@ import { NgClass } from '@angular/common';
   imports: [ReactiveFormsModule, NgClass],
 })
 export class AppComponent {
-  form: FormGroup = new FormGroup({
+  public form: FormGroup = new FormGroup({
     password: new FormControl('', [
       Validators.required,
       Validators.minLength(8),
     ]),
   });
-  passwordStrength: 'empty' | 'easy' | 'medium' | 'strong' = 'empty';
+  public passwordStrength: 'empty' | 'easy' | 'medium' | 'strong' = 'empty';
 
-  onSubmit() {
+  public onSubmit(): void {
     console.log(this.form.value);
     this.resetStrength();
-    this.form.reset();
   }
 
-  checkPasswordStrength() {
+  public checkPasswordStrength(): void {
     const passwordControl = this.form.get('password');
 
     if (!passwordControl) {
@@ -55,7 +54,8 @@ export class AppComponent {
       this.passwordStrength = 'easy';
     }
   }
-  resetStrength() {
+  private resetStrength(): void {
     this.passwordStrength = 'empty';
+    this.form.reset();
   }
 }
