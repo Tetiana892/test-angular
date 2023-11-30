@@ -1,14 +1,20 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Validators } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet],
+  selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
+  imports: [ReactiveFormsModule],
 })
 export class AppComponent {
-  title = 'my-app';
+  form: FormGroup = new FormGroup({
+    password: new FormControl('', Validators.required),
+  });
+  onSubmit() {
+    console.log(this.form.value);
+  }
 }
