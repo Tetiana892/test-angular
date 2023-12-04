@@ -24,6 +24,7 @@ export class AppComponent {
   });
 
   public passwordStrength: 'empty' | 'easy' | 'medium' | 'strong' = 'empty';
+
   constructor(private passwordStrengthService: PasswordStrengthService) {}
 
   public onSubmit(): void {

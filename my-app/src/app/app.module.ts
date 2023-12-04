@@ -3,9 +3,10 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
+import { PasswordStrengthIndicatorComponent } from './components/indicator/password.indicator';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, PasswordStrengthIndicatorComponent],
   imports: [BrowserModule, ReactiveFormsModule, CommonModule],
   bootstrap: [AppComponent],
 })
