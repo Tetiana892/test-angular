@@ -21,6 +21,7 @@ export class AppComponent {
       Validators.minLength(8),
     ]),
   });
+
   public passwordStrength: 'empty' | 'easy' | 'medium' | 'strong' = 'empty';
 
   public onSubmit(): void {
