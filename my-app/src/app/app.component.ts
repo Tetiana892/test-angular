@@ -6,6 +6,7 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { NgClass } from '@angular/common';
+import { PasswordStrengthService } from './components/service/password.service';
 
 @Component({
   standalone: true,
@@ -23,6 +24,7 @@ export class AppComponent {
   });
 
   public passwordStrength: 'empty' | 'easy' | 'medium' | 'strong' = 'empty';
+  constructor(private passwordStrengthService: PasswordStrengthService) {}
 
   public onSubmit(): void {
     console.log(this.form.value);
@@ -31,29 +33,12 @@ export class AppComponent {
 
   public checkPasswordStrength(): void {
     const passwordControl = this.form.get('password');
-
-    if (!passwordControl) {
+    if (!passwordControl || passwordControl.value === undefined) {
       return;
     }
     const password = passwordControl.value;
-
-    if (!password || password.length < 8) {
-      // Якщо пароль порожній або менше 8 символів, всі розділи червоні
-      this.passwordStrength = 'easy';
-    } else if (
-      /[a-zA-Z]/.test(password) &&
-      /[0-9]/.test(password) &&
-      /[^a-zA-Z0-9]/.test(password)
-    ) {
-      // Якщо пароль містить літери, цифри та символи, він надійний (усі розділи зелені)
-      this.passwordStrength = 'strong';
-    } else if (/[a-zA-Z]/.test(password) && /[0-9]/.test(password)) {
-      // Якщо пароль містить літери та цифри, він середній (перші два розділи жовті, останній сірий)
-      this.passwordStrength = 'medium';
-    } else {
-      // Якщо пароль містить букви та цифри, він середній (перші два розділи жовті, останній сірий)
-      this.passwordStrength = 'easy';
-    }
+    this.passwordStrength =
+      this.passwordStrengthService.checkPasswordStrength(password);
   }
   private resetStrength(): void {
     this.passwordStrength = 'empty';
