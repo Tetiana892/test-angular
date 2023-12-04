@@ -10,36 +10,34 @@
   <div class="card-action">
     <button class="btn" type="submit" [disabled]="!form.valid">Submit</button>
   </div>
+
   <!-- <app-password-indicator
     [passwordStrength]="passwordStrength"
   ></app-password-indicator> -->
-  <div
-    class="strength-section"
-    id="section1"
-    [ngClass]="{
-      gray: passwordStrength === 'empty',
-      red: passwordStrength === 'easy',
-      yellow: passwordStrength === 'medium',
-      green: passwordStrength === 'strong'
-    }"
-  ></div>
-  <div
-    class="strength-section"
-    id="section2"
-    [ngClass]="{
-      gray: passwordStrength === 'empty',
-      red: passwordStrength === 'easy',
-      yellow: passwordStrength === 'medium',
-      green: passwordStrength === 'strong'
-    }"
-  ></div>
-  <div
-    class="strength-section"
-    id="section3"
-    [ngClass]="{
-      gray: passwordStrength === 'empty',
-      red: passwordStrength === 'easy',
 
+  <div
+    class="strength-section"
+    [ngClass]="{
+      gray: passwordStrength === 'empty',
+      red: passwordStrength === 'easy',
+      yellow: passwordStrength === 'medium',
+      green: passwordStrength === 'strong'
+    }"
+  ></div>
+  <div
+    class="strength-section"
+    [ngClass]="{
+      gray: passwordStrength === 'empty',
+      red: passwordStrength === 'easy',
+      yellow: passwordStrength === 'medium',
+      green: passwordStrength === 'strong'
+    }"
+  ></div>
+  <div
+    class="strength-section"
+    [ngClass]="{
+      gray: passwordStrength === 'empty',
+      red: passwordStrength === 'easy',
       green: passwordStrength === 'strong'
     }"
   ></div>

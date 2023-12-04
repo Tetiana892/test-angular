@@ -7,5 +7,6 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./password.indicator.scss'],
 })
 export class PasswordStrengthIndicatorComponent {
+  constructor() {}
   @Input() passwordStrength: 'empty' | 'easy' | 'medium' | 'strong' = 'empty';
 }
