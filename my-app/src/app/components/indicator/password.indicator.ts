@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Output } from '@angular/core';
 
 @Component({
   standalone: true,
@@ -8,5 +8,5 @@ import { Component, Input } from '@angular/core';
 })
 export class PasswordStrengthIndicatorComponent {
   constructor() {}
-  @Input() passwordStrength: 'empty' | 'easy' | 'medium' | 'strong' = 'empty';
+  @Output() passwordStrength: 'empty' | 'easy' | 'medium' | 'strong' = 'empty';
 }
